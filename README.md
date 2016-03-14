@@ -108,9 +108,9 @@ For the library I have chosen continuations and joining as the default methods i
 ```
 public interface Union2<Left, Right> {
 
-    void continued(Consumer<First> continuationFirst, Consumer<Second> continuationSecond);
+    void continued(Action1<First> continuationFirst, Action1<Second> continuationSecond);
 
-    <R> R join(Function<First, R> mapFirst, Function<Second, R> mapSecond);
+    <R> R join(Func1<First, R> mapFirst, Func1<Second, R> mapSecond);
 }
 ```
 
@@ -196,11 +196,11 @@ public class Salute {
         this.either = either;
     }
 
-    public void openDoor(Consumer<Dog> continueDog, Consumer<Neighbour> continueNeighbour) {
+    public void openDoor(Action1<Dog> continueDog, Action1<Neighbour> continueNeighbour) {
         return either.continued(continueDog, continueNeighbour);
     }
 
-    public String rememberSalute(Function<Dog, String> mapDog, Function<Neighbour, String> mapNeighbour) {
+    public String rememberSalute(Func1<Dog, String> mapDog, Func1<Neighbour, String> mapNeighbour) {
         return either.join(mapDog, mapNeighbour);
     }
 }
@@ -250,11 +250,11 @@ class CardPayment extends PaymentType {
         return /* some logic here */
     }
 
-    public void continued(Consumer<CardPayment> continuationLeft, Consumer<PayPalPayment> continuationMiddle, Consumer<BankTransferPayment> continuationRight) {
+    public void continued(Action1<CardPayment> continuationLeft, Action1<PayPalPayment> continuationMiddle, Action1<BankTransferPayment> continuationRight) {
         continuationLeft.call(value);
     }
 
-    public <T> T join(Function<CardPayment, T> mapLeft, Function<PayPalPayment, T> mapMiddle, Function<BankTransferPayment, T> mapRight) {
+    public <T> T join(Func1<CardPayment, T> mapLeft, Func1<PayPalPayment, T> mapMiddle, Func1<BankTransferPayment, T> mapRight) {
         return mapLeft.call(value);
     }
 }
@@ -274,11 +274,11 @@ class PayPalPayment extends PaymentType {
         return /* some logic here */
     }
 
-    public void continued(Consumer<CardPayment> continuationLeft, Consumer<PayPalPayment> continuationMiddle, Consumer<BankTransferPayment> continuationRight) {
+    public void continued(Action1<CardPayment> continuationLeft, Action1<PayPalPayment> continuationMiddle, Action1<BankTransferPayment> continuationRight) {
         continuationMiddle.call(value);
     }
 
-    public <T> T join(Function<CardPayment, T> mapLeft, Function<PayPalPayment, T> mapMiddle, Function<BankTransferPayment, T> mapRight) {
+    public <T> T join(Func1<CardPayment, T> mapLeft, Func1<PayPalPayment, T> mapMiddle, Func1<BankTransferPayment, T> mapRight) {
         return mapMiddle.call(value);
     }
 }
@@ -296,11 +296,11 @@ class BankTransferPayment extends PaymentType {
         return /* some logic here */
     }
 
-    public void continued(Consumer<CardPayment> continuationLeft, Consumer<PayPalPayment> continuationMiddle, Consumer<BankTransferPayment> continuationRight) {
+    public void continued(Action1<CardPayment> continuationLeft, Action1<PayPalPayment> continuationMiddle, Action1<BankTransferPayment> continuationRight) {
         continuationRight.call(value);
     }
 
-    public <T> T join(Function<CardPayment, T> mapLeft, Function<PayPalPayment, T> mapMiddle, Function<BankTransferPayment, T> mapRight) {
+    public <T> T join(Func1<CardPayment, T> mapLeft, Func1<PayPalPayment, T> mapMiddle, Func1<BankTransferPayment, T> mapRight) {
         return mapRight.call(value);
     }
 }
@@ -318,25 +318,25 @@ The last approach is the recommended to make the most out of the principles desc
 
 A complete version of the [Tennis kata](http://www.codingdojo.org/cgi-bin/index.pl?KataTennis) can be found in [TennisGame.java](sealedunions/src/test/java/com/pacoworks/sealedunions/TennisGame.java) along with usage tests at [TennisGameTest.java](sealedunions/src/test/java/com/pacoworks/sealedunions/TennisGameTest.java)
 ```
-public interface Score {
+public abstract class Score {
 
     Union4<Points, Advantage, Deuce, Game> getScore();
 }
 
 public final class Points extends Pair<PlayerPoints, PlayerPoints> { }
 
-public interface PlayerPoints {
+public abstract class PlayerPoints {
 
     Union4<Zero, Fifteen, Thirty, Forty> getPlayerPoints();
 }
 
-public interface Advantage extends Player { }
+public abstract class Advantage extends Player { }
 
 public final class Deuce { }
 
-public interface Game extends Player { }
+public abstract class Game extends Player { }
 
-public interface Player {
+public abstract class Player {
 
     Union2<PlayerOne, PlayerTwo> getPlayer();
 }
