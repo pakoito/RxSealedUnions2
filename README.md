@@ -318,7 +318,7 @@ if (payment.valid()) {
 #### DDD
 The last approach is the recommended to make the most out of the principles described across this document, using types rather than inheritance or fields.
 
-A complete version of the [Tennis kata](http://www.codingdojo.org/cgi-bin/index.pl?KataTennis) can be found in [TennisGame.java](sealedunions/src/test/java/com/pacoworks/rxsealedunions/tennis/TennisGame.java) along with usage tests at [TennisGameTest.java](sealedunions/src/test/java/com/pacoworks/rxsealedunions/TennisGameTest.java)
+A complete version of the [Tennis kata](http://www.codingdojo.org/cgi-bin/index.pl?KataTennis) can be found in [TennisGame.java](rxsealedunions/src/test/java/com/pacoworks/rxsealedunions/tennis/TennisGame.java) along with usage tests at [TennisGameTest.java](rxsealedunions/src/test/java/com/pacoworks/rxsealedunions/TennisGameTest.java)
 ```
 public abstract class Score {
 
