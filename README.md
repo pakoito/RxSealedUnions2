@@ -1,4 +1,6 @@
-# JavaSealedUnions
+# RxSealedUnions
+
+This repository is a RxJava backport of Java 8's [JavaSealedUnions](https://github.com/pakoito/JavaSealedUnions) library.
 
 ## ACKNOWLEDGEMENTS
 This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](https://fsharpforfunandprofit.com/ddd/) (DDD) talk by [Scott Wlaschin](https://github.com/swlaschin). Another similar talk with the full [Tennis kata](http://www.codingdojo.org/cgi-bin/index.pl?KataTennis) we'll use as an example below is [Types + Properties = Software](https://channel9.msdn.com/Events/FSharp-Events/fsharpConf-2016/Types-Properties-Software) by [Mark Seemann](https://github.com/ploeh).
@@ -14,7 +16,7 @@ Add as a dependency to your `build.gradle`
 
     dependencies {
         ...
-        compile 'com.github.pakoito:JavaSealedUnions:1.0.0'
+        compile 'com.github.pakoito:RxSealedUnions:1.0.0'
         ...
     }
 
@@ -29,12 +31,12 @@ or to your `pom.xml`
 
     <dependency>
         <groupId>com.github.pakoito</groupId>
-        <artifactId>JavaSealedUnions</artifactId>
+        <artifactId>RxSealedUnions</artifactId>
         <version>1.0.0</version>
     </dependency>
 
 ## RATIONALE
-JavaSealedUnions brings unions into idiomatic Java 8 to allow for better domain modelling. It can also help representing sealed classes, but that is not the main focus. Chaining operations and monadic composition using JavaSealedUnions is also outside the scope of the library, but any union can be lifted to other frameworks like [RxJava](http://reactivex.io/) and [Javaslang](http://www.javaslang.io/). A backport library for RxJava and Java 6 is available at [pakoito/RxSealedUnions](https://github.com/pakoito/RxSealedUnions).
+RxSealedUnions brings unions into idiomatic java 6 using Reactive Extensions to allow for better domain modelling. It can also help representing sealed classes, but that is not the main focus. Chaining operations and monadic composition using RxSealedUnions is also outside the scope of the library, but any union can be lifted to Observables as shown by [RxEither](https://github.com/eleventigers/rxeither).
 
 Java's type system is considered not very powerful although it contains most OOP niceties. Some of the most known absences are [tagged unions](https://en.wikipedia.org/wiki/Tagged_union) and sealed classes. Sealed classes are available in languages like [Kotlin](https://kotlinlang.org/docs/reference/classes.html#sealed-classes), or [C#](https://msdn.microsoft.com/en-gb/library/88c54tsw.aspx). Tagged unions are common on [Swift](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html) and [Rust](https://doc.rust-lang.org/book/enums.html).
 
@@ -316,7 +318,7 @@ if (payment.valid()) {
 #### DDD
 The last approach is the recommended to make the most out of the principles described across this document, using types rather than inheritance or fields.
 
-A complete version of the [Tennis kata](http://www.codingdojo.org/cgi-bin/index.pl?KataTennis) can be found in [TennisGame.java](sealedunions/src/test/java/com/pacoworks/sealedunions/TennisGame.java) along with usage tests at [TennisGameTest.java](sealedunions/src/test/java/com/pacoworks/sealedunions/TennisGameTest.java)
+A complete version of the [Tennis kata](http://www.codingdojo.org/cgi-bin/index.pl?KataTennis) can be found in [TennisGame.java](sealedunions/src/test/java/com/pacoworks/rxsealedunions/tennis/TennisGame.java) along with usage tests at [TennisGameTest.java](sealedunions/src/test/java/com/pacoworks/rxsealedunions/TennisGameTest.java)
 ```
 public abstract class Score {
 
