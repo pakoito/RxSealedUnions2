@@ -36,7 +36,7 @@ or to your `pom.xml`
     </dependency>
 
 ## RATIONALE
-RxSealedUnions brings unions into idiomatic java 6 using Reactive Extensions to allow for better domain modelling. It can also help representing sealed classes, but that is not the main focus. Chaining operations and monadic composition using RxSealedUnions is also outside the scope of the library, but any union can be lifted to Observables as shown by [RxEither](https://github.com/eleventigers/rxeither).
+RxSealedUnions brings unions into idiomatic Java 6 using Reactive Extensions to allow for better domain modelling. It can also help representing sealed classes, but that is not the main focus. Chaining operations and monadic composition using RxSealedUnions is also outside the scope of the library, but any union can be lifted to Observables as shown by [RxEither](https://github.com/eleventigers/rxeither).
 
 Java's type system is considered not very powerful although it contains most OOP niceties. Some of the most known absences are [tagged unions](https://en.wikipedia.org/wiki/Tagged_union) and sealed classes. Sealed classes are available in languages like [Kotlin](https://kotlinlang.org/docs/reference/classes.html#sealed-classes), or [C#](https://msdn.microsoft.com/en-gb/library/88c54tsw.aspx). Tagged unions are common on [Swift](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html) and [Rust](https://doc.rust-lang.org/book/enums.html).
 
