@@ -1,36 +1,36 @@
 
-package com.pacoworks.sealedunions.tennis;
+package com.pacoworks.rxsealedunions.tennis;
 
 import com.pacoworks.rxsealedunions.Union2;
 import com.pacoworks.rxsealedunions.generic.GenericUnions;
 
-public abstract class Game extends Player {
-    private Game() {
-    }
-
+public abstract class Advantage extends Player {
     private static final Union2.Factory<PlayerOne, PlayerTwo> FACTORY = GenericUnions
             .doubletFactory();
 
-    private static final Union2<PlayerOne, PlayerTwo> GAME_PLAYER_TWO = FACTORY
+    private static final Union2<PlayerOne, PlayerTwo> ADVANTAGE_SECOND = FACTORY
             .second(new PlayerTwo());
 
-    private static final Union2<PlayerOne, PlayerTwo> GAME_PLAYER_ONE = FACTORY
+    private static final Union2<PlayerOne, PlayerTwo> ADVANTAGE_FIRST = FACTORY
             .first(new PlayerOne());
 
-    public static Game one() {
-        return new Game() {
+    private Advantage() {
+    }
+
+    public static Advantage one() {
+        return new Advantage() {
             @Override
             public Union2<PlayerOne, PlayerTwo> getPlayer() {
-                return GAME_PLAYER_ONE;
+                return ADVANTAGE_FIRST;
             }
         };
     }
 
-    public static Game two() {
-        return new Game() {
+    public static Advantage two() {
+        return new Advantage() {
             @Override
             public Union2<PlayerOne, PlayerTwo> getPlayer() {
-                return GAME_PLAYER_TWO;
+                return ADVANTAGE_SECOND;
             }
         };
     }

@@ -1,4 +1,4 @@
-package com.pacoworks.sealedunions.tennis;
+package com.pacoworks.rxsealedunions.tennis;
 
 public class PlayerTwo {
     public boolean equals(Object o) {

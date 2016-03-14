@@ -1,5 +1,5 @@
 
-package com.pacoworks.sealedunions.tennis;
+package com.pacoworks.rxsealedunions.tennis;
 
 import rx.functions.Func1;
 

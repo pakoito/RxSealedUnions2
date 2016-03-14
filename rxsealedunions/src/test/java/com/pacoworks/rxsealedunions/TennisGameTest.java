@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.pacoworks.sealedunions;
+package com.pacoworks.rxsealedunions;
 
-import com.pacoworks.sealedunions.tennis.*;
+import com.pacoworks.rxsealedunions.tennis.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static com.pacoworks.sealedunions.tennis.TennisGame.scorePoint;
+import static com.pacoworks.rxsealedunions.tennis.TennisGame.scorePoint;
 
 public class TennisGameTest {
     @Test

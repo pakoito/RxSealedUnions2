@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.pacoworks.sealedunions.generic;
+package com.pacoworks.rxsealedunions.generic;
 
 import com.pacoworks.rxsealedunions.*;
-import com.pacoworks.rxsealedunions.generic.GenericUnions;
 import org.junit.Assert;
 import org.junit.Test;
 import rx.functions.Action0;
