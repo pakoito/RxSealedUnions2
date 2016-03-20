@@ -16,8 +16,40 @@
 
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
 
 group = 'com.github.pakoito'
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            groupId 'com.pacoworks.rxsealedunions'
+            artifactId 'rxsealedunions'
+            version '1.0.0'
+        }
+    }
+}
+
+bintray {
+    user = ''
+    key = ''
+    publications = ['MyPublication']
+    pkg {
+        repo = 'maven'
+        name = 'RxSealedUnions'
+        userOrg = user
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/pakoito/RxSealedUnions.git'
+        labels = ['java', 'rxjava', 'functional']
+        publicDownloadNumbers = false
+        version {
+            name = '1.0.0'
+            vcsTag = '1.0.0'
+        }
+    }
+}
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
