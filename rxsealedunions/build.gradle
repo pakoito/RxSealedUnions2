@@ -21,6 +21,10 @@ apply plugin: 'com.jfrog.bintray'
 
 group = 'com.github.pakoito'
 
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
 publishing {
     publications {
         MyPublication(MavenPublication) {
@@ -28,6 +32,9 @@ publishing {
             groupId 'com.pacoworks.rxsealedunions'
             artifactId 'rxsealedunions'
             version '1.0.0'
+            artifact sourceJar {
+                classifier "sources"
+            }
         }
     }
 }
