@@ -85,7 +85,7 @@ if (union.isOne()) {
 
  ... and so and so until 9. Problem? The api can be dereferenced using `getXXX()` without calling any of the `isXXX()` methods, leading to exceptions and unexpected states. It adds one unneeded extra operation.
 
-- Polymorphism:
+- Subtyping:
 
 ```java
 MyElement element = createElement();
