@@ -17,7 +17,7 @@ Add as a dependency to your `build.gradle`
 
     dependencies {
         ...
-        compile 'com.github.pakoito:RxSealedUnions:1.0.0'
+        compile 'com.github.pakoito:RxSealedUnions:1.0.1'
         ...
     }
 ```
@@ -35,7 +35,7 @@ or to your `pom.xml`
     <dependency>
         <groupId>com.github.pakoito</groupId>
         <artifactId>RxSealedUnions</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </dependency>
 ```
 
