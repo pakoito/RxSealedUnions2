@@ -58,4 +58,9 @@ final class Union4Fourth<A, B, C, D> implements Union4<A, B, C, D> {
         result = result * PRIME + ($value == null ? 0 : $value.hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        return value.toString();
+    }
 }

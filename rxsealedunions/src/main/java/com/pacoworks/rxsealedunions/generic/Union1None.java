@@ -47,4 +47,9 @@ final class Union1None<T> implements Union1<T> {
         int result = 1;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "None()";
+    }
 }

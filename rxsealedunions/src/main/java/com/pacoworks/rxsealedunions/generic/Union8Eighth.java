@@ -61,4 +61,9 @@ final class Union8Eighth<A, B, C, D, E, F, G, H> implements Union8<A, B, C, D, E
         result = result * PRIME + ($value == null ? 0 : $value.hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        return value.toString();
+    }
 }

@@ -59,4 +59,9 @@ final class Union5Second<A, B, C, D, E> implements Union5<A, B, C, D, E> {
         result = result * PRIME + ($value == null ? 0 : $value.hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        return value.toString();
+    }
 }

@@ -56,4 +56,9 @@ final class Union2Second<T, U> implements Union2<T, U> {
         result = result * PRIME + ($value == null ? 0 : $value.hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        return value.toString();
+    }
 }

@@ -57,4 +57,9 @@ final class Union3First<T, U, V> implements Union3<T, U, V> {
         result = result * PRIME + ($value == null ? 0 : $value.hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        return value.toString();
+    }
 }

@@ -58,4 +58,9 @@ final class Union1First<T> implements Union1<T> {
         result = result * PRIME + ($value == null ? 0 : $value.hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        return value.toString();
+    }
 }
