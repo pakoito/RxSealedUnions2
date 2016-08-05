@@ -30,17 +30,18 @@ final class Union6Second<A, B, C, D, E, F> implements Union6<A, B, C, D, E, F> {
 
     @Override
     public void continued(Action1<A> continuationFirst, Action1<B> continuationSecond,
-                          Action1<C> continuationThird, Action1<D> continuationFourth,
-                          Action1<E> continuationFifth, Action1<F> continuationSixth) {
+            Action1<C> continuationThird, Action1<D> continuationFourth,
+            Action1<E> continuationFifth, Action1<F> continuationSixth) {
         continuationSecond.call(value);
     }
 
     @Override
     public <R> R join(Func1<A, R> mapFirst, Func1<B, R> mapSecond, Func1<C, R> mapThird,
-                      Func1<D, R> mapFourth, Func1<E, R> mapFifth, Func1<F, R> mapSixth) {
+            Func1<D, R> mapFourth, Func1<E, R> mapFifth, Func1<F, R> mapSixth) {
         return mapSecond.call(value);
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == this)
             return true;
@@ -52,6 +53,7 @@ final class Union6Second<A, B, C, D, E, F> implements Union6<A, B, C, D, E, F> {
         return this$value == null ? other$value == null : this$value.equals(other$value);
     }
 
+    @Override
     public int hashCode() {
         final int PRIME = 59;
         int result = 1;

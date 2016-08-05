@@ -38,6 +38,7 @@ final class Union2First<T, U> implements Union2<T, U> {
         return mapFirst.call(value);
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == this)
             return true;
@@ -49,6 +50,7 @@ final class Union2First<T, U> implements Union2<T, U> {
         return this$value == null ? other$value == null : this$value.equals(other$value);
     }
 
+    @Override
     public int hashCode() {
         final int PRIME = 59;
         int result = 1;

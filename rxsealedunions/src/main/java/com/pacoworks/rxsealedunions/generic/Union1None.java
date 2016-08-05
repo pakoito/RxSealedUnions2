@@ -34,6 +34,7 @@ final class Union1None<T> implements Union1<T> {
         return mapNone.call();
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == this)
             return true;
@@ -43,6 +44,7 @@ final class Union1None<T> implements Union1<T> {
         return true;
     }
 
+    @Override
     public int hashCode() {
         int result = 1;
         return result;

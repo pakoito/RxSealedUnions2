@@ -30,20 +30,21 @@ final class Union9Seventh<A, B, C, D, E, F, G, H, I> implements Union9<A, B, C, 
 
     @Override
     public void continued(Action1<A> continuationFirst, Action1<B> continuationSecond,
-                          Action1<C> continuationThird, Action1<D> continuationFourth,
-                          Action1<E> continuationFifth, Action1<F> continuationSixth,
-                          Action1<G> continuationSeventh, Action1<H> continuationEighth,
-                          Action1<I> continuationNinth) {
+            Action1<C> continuationThird, Action1<D> continuationFourth,
+            Action1<E> continuationFifth, Action1<F> continuationSixth,
+            Action1<G> continuationSeventh, Action1<H> continuationEighth,
+            Action1<I> continuationNinth) {
         continuationSeventh.call(value);
     }
 
     @Override
     public <R> R join(Func1<A, R> mapFirst, Func1<B, R> mapSecond, Func1<C, R> mapThird,
-                      Func1<D, R> mapFourth, Func1<E, R> mapFifth, Func1<F, R> mapSixth,
-                      Func1<G, R> mapSeventh, Func1<H, R> mapEighth, Func1<I, R> mapNinth) {
+            Func1<D, R> mapFourth, Func1<E, R> mapFifth, Func1<F, R> mapSixth,
+            Func1<G, R> mapSeventh, Func1<H, R> mapEighth, Func1<I, R> mapNinth) {
         return mapSeventh.call(value);
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == this)
             return true;
@@ -55,6 +56,7 @@ final class Union9Seventh<A, B, C, D, E, F, G, H, I> implements Union9<A, B, C, 
         return this$value == null ? other$value == null : this$value.equals(other$value);
     }
 
+    @Override
     public int hashCode() {
         final int PRIME = 59;
         int result = 1;

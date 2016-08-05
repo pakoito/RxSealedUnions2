@@ -30,7 +30,7 @@ final class Union3First<T, U, V> implements Union3<T, U, V> {
 
     @Override
     public void continued(Action1<T> continuationFirst, Action1<U> continuationSecond,
-                          Action1<V> continuationThird) {
+            Action1<V> continuationThird) {
         continuationFirst.call(value);
     }
 
@@ -39,6 +39,7 @@ final class Union3First<T, U, V> implements Union3<T, U, V> {
         return mapFirst.call(value);
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == this)
             return true;
@@ -50,6 +51,7 @@ final class Union3First<T, U, V> implements Union3<T, U, V> {
         return this$value == null ? other$value == null : this$value.equals(other$value);
     }
 
+    @Override
     public int hashCode() {
         final int PRIME = 59;
         int result = 1;
