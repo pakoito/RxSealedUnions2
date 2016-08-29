@@ -16,22 +16,33 @@
 
 package com.pacoworks.rxsealedunions.generic;
 
-import com.pacoworks.rxsealedunions.*;
+import com.pacoworks.rxsealedunions.Union0;
+import com.pacoworks.rxsealedunions.Union1;
+import com.pacoworks.rxsealedunions.Union2;
+import com.pacoworks.rxsealedunions.Union3;
+import com.pacoworks.rxsealedunions.Union4;
+import com.pacoworks.rxsealedunions.Union5;
+import com.pacoworks.rxsealedunions.Union6;
+import com.pacoworks.rxsealedunions.Union7;
+import com.pacoworks.rxsealedunions.Union8;
+import com.pacoworks.rxsealedunions.Union9;
+
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Arrays;
+
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func1;
-
-import java.util.Arrays;
 
 public class GenericUnionsTest {
     private static final String VALID = "a";
 
     private static final String INVALID = "";
 
-    private static final java.util.List<String> VALID_ARRAY = Arrays.asList(VALID, VALID, VALID,
+    private static final java.util.List<String> VALID_ARRAY = Arrays.asList(VALID, VALID, VALID, VALID,
             VALID, VALID, VALID, VALID, VALID, VALID);
 
     private static final Func1<Integer, String> VALUE = new Func1<Integer, String>() {
@@ -63,6 +74,7 @@ public class GenericUnionsTest {
 
     @Test
     public void testJoin() throws Exception {
+        Union0.Factory<Integer> nulletFactory = GenericUnions.nulletFactory();
         Union1.Factory<Integer> singletFactory = GenericUnions.singletFactory();
         Union2.Factory<Integer, Integer> doubletFactory = GenericUnions.doubletFactory();
         Union3.Factory<Integer, Integer, Integer> tripletFactory = GenericUnions.tripletFactory();
@@ -78,6 +90,7 @@ public class GenericUnionsTest {
                 .octetFactory();
         Union9.Factory<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer> nonetFactory = GenericUnions
                 .nonetFactory();
+        String join0 = nulletFactory.first(0).join(VALUE);
         String join1 = singletFactory.first(0).join(VALUE, new Func0<String>() {
             @Override
             public String call() {
@@ -95,7 +108,7 @@ public class GenericUnionsTest {
         String join9 = nonetFactory.first(0).join(VALUE, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
                 EMPTY, EMPTY);
         Assert.assertEquals(VALID_ARRAY,
-                Arrays.asList(join1, join2, join3, join4, join5, join6, join7, join8, join9));
+                Arrays.asList(join0, join1, join2, join3, join4, join5, join6, join7, join8, join9));
         join1 = singletFactory.none().join(EMPTY, new Func0<String>() {
             @Override
             public String call() {
@@ -112,7 +125,7 @@ public class GenericUnionsTest {
         join9 = nonetFactory.second(0).join(EMPTY, VALUE, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
                 EMPTY);
         Assert.assertEquals(VALID_ARRAY,
-                Arrays.asList(join1, join2, join3, join4, join5, join6, join7, join8, join9));
+                Arrays.asList(join0, join1, join2, join3, join4, join5, join6, join7, join8, join9));
         join3 = tripletFactory.third(0).join(EMPTY, EMPTY, VALUE);
         join4 = quartetFactory.third(0).join(EMPTY, EMPTY, VALUE, EMPTY);
         join5 = quintetFactory.third(0).join(EMPTY, EMPTY, VALUE, EMPTY, EMPTY);
@@ -122,7 +135,7 @@ public class GenericUnionsTest {
         join9 = nonetFactory.third(0).join(EMPTY, EMPTY, VALUE, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
                 EMPTY);
         Assert.assertEquals(VALID_ARRAY,
-                Arrays.asList(join1, join2, join3, join4, join5, join6, join7, join8, join9));
+                Arrays.asList(join0, join1, join2, join3, join4, join5, join6, join7, join8, join9));
         join4 = quartetFactory.fourth(0).join(EMPTY, EMPTY, EMPTY, VALUE);
         join5 = quintetFactory.fourth(0).join(EMPTY, EMPTY, EMPTY, VALUE, EMPTY);
         join6 = sextetFactory.fourth(0).join(EMPTY, EMPTY, EMPTY, VALUE, EMPTY, EMPTY);
@@ -131,7 +144,7 @@ public class GenericUnionsTest {
         join9 = nonetFactory.fourth(0).join(EMPTY, EMPTY, EMPTY, VALUE, EMPTY, EMPTY, EMPTY, EMPTY,
                 EMPTY);
         Assert.assertEquals(VALID_ARRAY,
-                Arrays.asList(join1, join2, join3, join4, join5, join6, join7, join8, join9));
+                Arrays.asList(join0, join1, join2, join3, join4, join5, join6, join7, join8, join9));
         join5 = quintetFactory.fifth(0).join(EMPTY, EMPTY, EMPTY, EMPTY, VALUE);
         join6 = sextetFactory.fifth(0).join(EMPTY, EMPTY, EMPTY, EMPTY, VALUE, EMPTY);
         join7 = septetFactory.fifth(0).join(EMPTY, EMPTY, EMPTY, EMPTY, VALUE, EMPTY, EMPTY);
@@ -139,34 +152,35 @@ public class GenericUnionsTest {
         join9 = nonetFactory.fifth(0).join(EMPTY, EMPTY, EMPTY, EMPTY, VALUE, EMPTY, EMPTY, EMPTY,
                 EMPTY);
         Assert.assertEquals(VALID_ARRAY,
-                Arrays.asList(join1, join2, join3, join4, join5, join6, join7, join8, join9));
+                Arrays.asList(join0, join1, join2, join3, join4, join5, join6, join7, join8, join9));
         join6 = sextetFactory.sixth(0).join(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, VALUE);
         join7 = septetFactory.sixth(0).join(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, VALUE, EMPTY);
         join8 = octetFactory.sixth(0).join(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, VALUE, EMPTY, EMPTY);
         join9 = nonetFactory.sixth(0).join(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, VALUE, EMPTY, EMPTY,
                 EMPTY);
         Assert.assertEquals(VALID_ARRAY,
-                Arrays.asList(join1, join2, join3, join4, join5, join6, join7, join8, join9));
+                Arrays.asList(join0, join1, join2, join3, join4, join5, join6, join7, join8, join9));
         join7 = septetFactory.seventh(0).join(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, VALUE);
         join8 = octetFactory.seventh(0).join(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, VALUE,
                 EMPTY);
         join9 = nonetFactory.seventh(0).join(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, VALUE, EMPTY,
                 EMPTY);
         Assert.assertEquals(VALID_ARRAY,
-                Arrays.asList(join1, join2, join3, join4, join5, join6, join7, join8, join9));
+                Arrays.asList(join0, join1, join2, join3, join4, join5, join6, join7, join8, join9));
         join8 = octetFactory.eighth(0).join(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, VALUE);
         join9 = nonetFactory.eighth(0).join(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, VALUE,
                 EMPTY);
         Assert.assertEquals(VALID_ARRAY,
-                Arrays.asList(join1, join2, join3, join4, join5, join6, join7, join8, join9));
+                Arrays.asList(join0, join1, join2, join3, join4, join5, join6, join7, join8, join9));
         join9 = nonetFactory.ninth(0).join(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
                 VALUE);
         Assert.assertEquals(VALID_ARRAY,
-                Arrays.asList(join1, join2, join3, join4, join5, join6, join7, join8, join9));
+                Arrays.asList(join0, join1, join2, join3, join4, join5, join6, join7, join8, join9));
     }
 
     @Test
     public void testContinued() throws Exception {
+        Union0.Factory<Integer> nulletFactory = GenericUnions.nulletFactory();
         Union1.Factory<Integer> singletFactory = GenericUnions.singletFactory();
         Union2.Factory<Integer, Integer> doubletFactory = GenericUnions.doubletFactory();
         Union3.Factory<Integer, Integer, Integer> tripletFactory = GenericUnions.tripletFactory();
@@ -182,6 +196,7 @@ public class GenericUnionsTest {
                 .octetFactory();
         Union9.Factory<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer> nonetFactory = GenericUnions
                 .nonetFactory();
+        nulletFactory.first(0).continued(SUCCESS);
         singletFactory.first(0).continued(SUCCESS, new Action0() {
             @Override
             public void call() {
