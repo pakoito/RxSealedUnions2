@@ -54,7 +54,7 @@ The intent of this library is to create a set of classes that can host one eleme
 
 For a higher number of parameters no abstraction is usually provided, and it's when other languages change to explicit union types. As Java does not have unions on the language, we have to continue abstracting away with 3 types (Left<L>, Middle<M> and Right<R>), 4 types, 5 types...etc.
 
-We're calling them `Union1<T>` for `Result`/`Optional`, `Union2<L, R>` for `Either`/`Try`, `Union3<L, M, R>`...up to `UnionN`, which for this library would be `Union9<A, B, C, D, E, F, G, H, I>`.
+We're calling them `Union1<T>` for `Result`/`Optional`, `Union2<L, R>` for `Either`/`Try`, `Union3<L, M, R>`...up to `UnionN`, which for this library would be `Union9<A, B, C, D, E, F, G, H, I>`. A special case for `Union0<A>` is given for cases where you simply require to box a type for design purposes, and future improvements.
 
 I heavily recommend watching the DDD talk linked above first to see what solutions this library provides compared to chainable types. Unions are used for intra-layer modelling, chainables are more fit for inter-layer communication.
 
@@ -148,7 +148,7 @@ public interface Factory<Left, Right> {
 ## USAGE
 
 ### Generic unions
-This set of classes are provided by the library to wrap any class regardless of its type. They come in flavours from `Union1` to `Union9`. `GenericUnions` is a class with factories for all the union types. Factories can be provided by calling one of `singletFactory()`, `doubletFactory()`, `tripletFactory()`, `quartetFactory()`, `quintetFactory()`, `sextetFactory()`, `septetFactory()`, `octetFactory()` and `nonetFactory()`.
+This set of classes are provided by the library to wrap any class regardless of its type. They come in flavours from `Union0` to `Union9`. `GenericUnions` is a class with factories for all the union types. Factories can be provided by calling one of `nulletFactory()`, `singletFactory()`, `doubletFactory()`, `tripletFactory()`, `quartetFactory()`, `quintetFactory()`, `sextetFactory()`, `septetFactory()`, `octetFactory()` and `nonetFactory()`.
 ```java
 public class LoggedInAccount {
     public final String id;
