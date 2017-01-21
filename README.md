@@ -2,7 +2,7 @@
 
 This repository is a RxJava backport of Java 8's [JavaSealedUnions](https://github.com/pakoito/JavaSealedUnions) library.
 
-For the RxJava 1.X version please go to [RxSealedUnions](https://github.com/pakoito/RxSealedUnions)
+For the RxJava 1.X version please go to [RxSealedUnions](https://github.com/pakoito/RxSealedUnions).
 
 ## ACKNOWLEDGEMENTS
 This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](https://fsharpforfunandprofit.com/ddd/) (DDD) talk by [Scott Wlaschin](https://github.com/swlaschin). Another similar talk with the full [Tennis kata](http://www.codingdojo.org/cgi-bin/index.pl?KataTennis) we'll use as an example below is [Types + Properties = Software](https://channel9.msdn.com/Events/FSharp-Events/fsharpConf-2016/Types-Properties-Software) by [Mark Seemann](https://github.com/ploeh).
@@ -52,7 +52,7 @@ The intent of this library is to create a set of classes that can host one eleme
 
 * The base case is `Result<T>` (also known as `Optional`), which is the union of two types: `Some<T>` and `None`.
 
-* The next case is `Either<A, B>` or `Try<T, Exception>`, which respectively wrap the union of two arbitrary types `Left<L>` and `Right<R>`, or `Success<T>` and `Failure<Exception>`.
+* The next case is `Either<A, B>` or `Try<Exception, T>`, which respectively wrap the union of two arbitrary types `Left<L>` and `Right<R>`, or `Failure<Exception>` and `Success<T>`.
 
 For a higher number of parameters no abstraction is usually provided, and it's when other languages change to explicit union types. As Java does not have unions on the language, we have to continue abstracting away with 3 types (Left<L>, Middle<M> and Right<R>), 4 types, 5 types...etc.
 
@@ -167,11 +167,11 @@ public class LoggedInAccount {
 }
 
 public LoggedInAccount login(String id){
-    Union4.Factory<User, Group, Administrator, Guest> quartetFactory = GenericUnions.quartetFactory();
+    Union4.Factory<User, Group, Administrator, Guest> quartetFactory = UnionFactories.quartetFactory();
     Union4<User, Group, Administrator, Guest> user =
                                                 database.getAccount(id)
                                                     ? quartetFactory.third(database.requestAdmin(id)
-                                                    : quartetFactory.first(database.requestUser(id))
+                                                    : quartetFactory.first(database.requestUser(id));
     LoggedInAccount account = new LoggedInAcctount(id, System.currentTimeMillis(), user);
     return account;
 }
