@@ -1,6 +1,8 @@
-# RxSealedUnions
+# RxSealedUnions2
 
 This repository is a RxJava backport of Java 8's [JavaSealedUnions](https://github.com/pakoito/JavaSealedUnions) library.
+
+For the RxJava 1.X version please go to [RxSealedUnions](https://github.com/pakoito/RxSealedUnions)
 
 ## ACKNOWLEDGEMENTS
 This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](https://fsharpforfunandprofit.com/ddd/) (DDD) talk by [Scott Wlaschin](https://github.com/swlaschin). Another similar talk with the full [Tennis kata](http://www.codingdojo.org/cgi-bin/index.pl?KataTennis) we'll use as an example below is [Types + Properties = Software](https://channel9.msdn.com/Events/FSharp-Events/fsharpConf-2016/Types-Properties-Software) by [Mark Seemann](https://github.com/ploeh).
@@ -17,7 +19,7 @@ Add as a dependency to your `build.gradle`
 
     dependencies {
         ...
-        compile 'com.github.pakoito:RxSealedUnions:1.1.0'
+        compile 'com.github.pakoito:RxSealedUnions2:1.0.0'
         ...
     }
 ```
@@ -34,8 +36,8 @@ or to your `pom.xml`
 
     <dependency>
         <groupId>com.github.pakoito</groupId>
-        <artifactId>RxSealedUnions</artifactId>
-        <version>1.1.0</version>
+        <artifactId>RxSealedUnions2</artifactId>
+        <version>1.0.0</version>
     </dependency>
 ```
 
