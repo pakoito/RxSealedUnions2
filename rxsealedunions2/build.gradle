@@ -29,9 +29,9 @@ publishing {
     publications {
         MyPublication(MavenPublication) {
             from components.java
-            groupId 'com.pacoworks.rxsealedunions'
-            artifactId 'rxsealedunions'
-            version '1.1.0'
+            groupId 'com.pacoworks.rxsealedunions2'
+            artifactId 'rxsealedunions2'
+            version '1.0.0'
             artifact sourceJar {
                 classifier "sources"
             }
@@ -45,15 +45,15 @@ bintray {
     publications = ['MyPublication']
     pkg {
         repo = 'maven'
-        name = 'RxSealedUnions'
+        name = 'RxSealedUnions2'
         userOrg = user
         licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/pakoito/RxSealedUnions.git'
+        vcsUrl = 'https://github.com/pakoito/RxSealedUnions2.git'
         labels = ['java', 'rxjava', 'functional']
         publicDownloadNumbers = false
         version {
-            name = '1.1.0'
-            vcsTag = '1.1.0'
+            name = '1.0.0'
+            vcsTag = '1.0.0'
         }
     }
 }
@@ -62,7 +62,7 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 dependencies {
-    compile 'io.reactivex:rxjava:1.1.9'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.3'
     testCompile 'junit:junit:4.12'
 }
 
