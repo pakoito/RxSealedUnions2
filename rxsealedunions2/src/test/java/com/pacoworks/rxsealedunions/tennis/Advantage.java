@@ -2,10 +2,10 @@
 package com.pacoworks.rxsealedunions.tennis;
 
 import com.pacoworks.rxsealedunions.Union2;
-import com.pacoworks.rxsealedunions.generic.GenericUnions;
+import com.pacoworks.rxsealedunions.generic.UnionFactories;
 
 public abstract class Advantage extends Player {
-    private static final Union2.Factory<PlayerOne, PlayerTwo> FACTORY = GenericUnions
+    private static final Union2.Factory<PlayerOne, PlayerTwo> FACTORY = UnionFactories
             .doubletFactory();
 
     private static final Union2<PlayerOne, PlayerTwo> ADVANTAGE_SECOND = FACTORY

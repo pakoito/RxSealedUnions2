@@ -1,13 +1,13 @@
 
 package com.pacoworks.rxsealedunions.tennis;
 
-import rx.functions.Func1;
-
 import com.pacoworks.rxsealedunions.Union2;
-import com.pacoworks.rxsealedunions.generic.GenericUnions;
+import com.pacoworks.rxsealedunions.generic.UnionFactories;
+
+import io.reactivex.functions.Function;
 
 public abstract class Player {
-    private static final Union2.Factory<PlayerOne, PlayerTwo> FACTORY = GenericUnions
+    private static final Union2.Factory<PlayerOne, PlayerTwo> FACTORY = UnionFactories
             .<PlayerOne, PlayerTwo> doubletFactory();
 
     private static final Union2<PlayerOne, PlayerTwo> PLAYER_TWO = FACTORY.second(new PlayerTwo());
@@ -36,14 +36,14 @@ public abstract class Player {
     }
 
     public static String getString(Player player) {
-        return player.getPlayer().join(new Func1<PlayerOne, String>() {
+        return player.getPlayer().join(new Function<PlayerOne, String>() {
             @Override
-            public String call(PlayerOne playerOne) {
+            public String apply(PlayerOne playerOne) {
                 return "Player 1";
             }
-        }, new Func1<PlayerTwo, String>() {
+        }, new Function<PlayerTwo, String>() {
             @Override
-            public String call(PlayerTwo playerTwo) {
+            public String apply(PlayerTwo playerTwo) {
                 return "Player 2";
             }
         });

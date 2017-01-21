@@ -1,10 +1,10 @@
 
 package com.pacoworks.rxsealedunions.tennis;
 
-import rx.functions.Func1;
-
 import com.pacoworks.rxsealedunions.Union4;
-import com.pacoworks.rxsealedunions.generic.GenericUnions;
+import com.pacoworks.rxsealedunions.generic.UnionFactories;
+
+import io.reactivex.functions.Function;
 
 public abstract class Score {
     private Score() {
@@ -15,7 +15,7 @@ public abstract class Score {
         return new Score() {
             @Override
             public Union4<Points, Advantage, Deuce, Game> getScore() {
-                return GenericUnions.<Points, Advantage, Deuce, Game> quartetFactory()
+                return UnionFactories.<Points, Advantage, Deuce, Game> quartetFactory()
                         .first(new Points(playerOnePoints, playerTwoPoints));
             }
         };
@@ -25,7 +25,7 @@ public abstract class Score {
         return new Score() {
             @Override
             public Union4<Points, Advantage, Deuce, Game> getScore() {
-                return GenericUnions.<Points, Advantage, Deuce, Game> quartetFactory()
+                return UnionFactories.<Points, Advantage, Deuce, Game> quartetFactory()
                         .second(advantage);
             }
         };
@@ -35,7 +35,7 @@ public abstract class Score {
         return new Score() {
             @Override
             public Union4<Points, Advantage, Deuce, Game> getScore() {
-                return GenericUnions.<Points, Advantage, Deuce, Game> quartetFactory()
+                return UnionFactories.<Points, Advantage, Deuce, Game> quartetFactory()
                         .third(new Deuce());
             }
         };
@@ -45,7 +45,7 @@ public abstract class Score {
         return new Score() {
             @Override
             public Union4<Points, Advantage, Deuce, Game> getScore() {
-                return GenericUnions.<Points, Advantage, Deuce, Game> quartetFactory().fourth(game);
+                return UnionFactories.<Points, Advantage, Deuce, Game> quartetFactory().fourth(game);
             }
         };
     }
@@ -60,27 +60,27 @@ public abstract class Score {
         return getString(this);
     }
 
-    private static Func1<Points, String> mapScoreString() {
-        return new Func1<Points, String>() {
+    private static Function<Points, String> mapScoreString() {
+        return new Function<Points, String>() {
             @Override
-            public String call(Points points) {
+            public String apply(Points points) {
                 return points.toString();
             }
         };
     }
 
-    private static Func1<Advantage, String> mapAdvantageString() {
-        return new Func1<Advantage, String>() {
+    private static Function<Advantage, String> mapAdvantageString() {
+        return new Function<Advantage, String>() {
             @Override
-            public String call(Advantage advantage) {
-                return advantage.getPlayer().join(new Func1<PlayerOne, String>() {
+            public String apply(Advantage advantage) {
+                return advantage.getPlayer().join(new Function<PlayerOne, String>() {
                     @Override
-                    public String call(PlayerOne playerOne) {
+                    public String apply(PlayerOne playerOne) {
                         return "Adv P1";
                     }
-                }, new Func1<PlayerTwo, String>() {
+                }, new Function<PlayerTwo, String>() {
                     @Override
-                    public String call(PlayerTwo playerTwo) {
+                    public String apply(PlayerTwo playerTwo) {
                         return "Adv P2";
                     }
                 });
@@ -88,27 +88,27 @@ public abstract class Score {
         };
     }
 
-    private static Func1<Deuce, String> mapDeuceString() {
-        return new Func1<Deuce, String>() {
+    private static Function<Deuce, String> mapDeuceString() {
+        return new Function<Deuce, String>() {
             @Override
-            public String call(Deuce deuce) {
+            public String apply(Deuce deuce) {
                 return "Deuce";
             }
         };
     }
 
-    private static Func1<Game, String> mapGameString() {
-        return new Func1<Game, String>() {
+    private static Function<Game, String> mapGameString() {
+        return new Function<Game, String>() {
             @Override
-            public String call(Game game) {
-                return game.getPlayer().join(new Func1<PlayerOne, String>() {
+            public String apply(Game game) {
+                return game.getPlayer().join(new Function<PlayerOne, String>() {
                     @Override
-                    public String call(PlayerOne playerOne) {
+                    public String apply(PlayerOne playerOne) {
                         return "Win P1";
                     }
-                }, new Func1<PlayerTwo, String>() {
+                }, new Function<PlayerTwo, String>() {
                     @Override
-                    public String call(PlayerTwo playerTwo) {
+                    public String apply(PlayerTwo playerTwo) {
                         return "Win P2";
                     }
                 });

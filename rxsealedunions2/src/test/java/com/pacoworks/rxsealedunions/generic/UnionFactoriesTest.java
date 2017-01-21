@@ -31,13 +31,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.concurrent.Callable;
 
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 
-public class GenericUnionsTest {
+public class UnionFactoriesTest {
     private static final String VALID = "a";
 
     private static final String INVALID = "";
@@ -45,53 +45,53 @@ public class GenericUnionsTest {
     private static final java.util.List<String> VALID_ARRAY = Arrays.asList(VALID, VALID, VALID, VALID,
             VALID, VALID, VALID, VALID, VALID, VALID);
 
-    private static final Func1<Integer, String> VALUE = new Func1<Integer, String>() {
+    private static final Function<Integer, String> VALUE = new Function<Integer, String>() {
         @Override
-        public String call(Integer integer) {
+        public String apply(Integer integer) {
             return VALID;
         }
     };
 
-    private static final Func1<Integer, String> EMPTY = new Func1<Integer, String>() {
+    private static final Function<Integer, String> EMPTY = new Function<Integer, String>() {
         @Override
-        public String call(Integer integer) {
+        public String apply(Integer integer) {
             return INVALID;
         }
     };
 
-    private static final Action1<Integer> SUCCESS = new Action1<Integer>() {
+    private static final Consumer<Integer> SUCCESS = new Consumer<Integer>() {
         @Override
-        public void call(Integer integer) {
+        public void accept(Integer integer) {
         }
     };
 
-    private static final Action1<Integer> ERROR = new Action1<Integer>() {
+    private static final Consumer<Integer> ERROR = new Consumer<Integer>() {
         @Override
-        public void call(Integer integer) {
+        public void accept(Integer integer) {
             throw new IllegalStateException();
         }
     };
 
     @Test
     public void testJoin() throws Exception {
-        Union0.Factory<Integer> nulletFactory = GenericUnions.nulletFactory();
-        Union1.Factory<Integer> singletFactory = GenericUnions.singletFactory();
-        Union2.Factory<Integer, Integer> doubletFactory = GenericUnions.doubletFactory();
-        Union3.Factory<Integer, Integer, Integer> tripletFactory = GenericUnions.tripletFactory();
-        Union4.Factory<Integer, Integer, Integer, Integer> quartetFactory = GenericUnions
+        Union0.Factory<Integer> nulletFactory = UnionFactories.nulletFactory();
+        Union1.Factory<Integer> singletFactory = UnionFactories.singletFactory();
+        Union2.Factory<Integer, Integer> doubletFactory = UnionFactories.doubletFactory();
+        Union3.Factory<Integer, Integer, Integer> tripletFactory = UnionFactories.tripletFactory();
+        Union4.Factory<Integer, Integer, Integer, Integer> quartetFactory = UnionFactories
                 .quartetFactory();
-        Union5.Factory<Integer, Integer, Integer, Integer, Integer> quintetFactory = GenericUnions
+        Union5.Factory<Integer, Integer, Integer, Integer, Integer> quintetFactory = UnionFactories
                 .quintetFactory();
-        Union6.Factory<Integer, Integer, Integer, Integer, Integer, Integer> sextetFactory = GenericUnions
+        Union6.Factory<Integer, Integer, Integer, Integer, Integer, Integer> sextetFactory = UnionFactories
                 .sextetFactory();
-        Union7.Factory<Integer, Integer, Integer, Integer, Integer, Integer, Integer> septetFactory = GenericUnions
+        Union7.Factory<Integer, Integer, Integer, Integer, Integer, Integer, Integer> septetFactory = UnionFactories
                 .septetFactory();
-        Union8.Factory<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer> octetFactory = GenericUnions
+        Union8.Factory<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer> octetFactory = UnionFactories
                 .octetFactory();
-        Union9.Factory<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer> nonetFactory = GenericUnions
+        Union9.Factory<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer> nonetFactory = UnionFactories
                 .nonetFactory();
         String join0 = nulletFactory.first(0).join(VALUE);
-        String join1 = singletFactory.first(0).join(VALUE, new Func0<String>() {
+        String join1 = singletFactory.first(0).join(VALUE, new Callable<String>() {
             @Override
             public String call() {
                 return INVALID;
@@ -109,7 +109,7 @@ public class GenericUnionsTest {
                 EMPTY, EMPTY);
         Assert.assertEquals(VALID_ARRAY,
                 Arrays.asList(join0, join1, join2, join3, join4, join5, join6, join7, join8, join9));
-        join1 = singletFactory.none().join(EMPTY, new Func0<String>() {
+        join1 = singletFactory.none().join(EMPTY, new Callable<String>() {
             @Override
             public String call() {
                 return VALID;
@@ -180,26 +180,26 @@ public class GenericUnionsTest {
 
     @Test
     public void testContinued() throws Exception {
-        Union0.Factory<Integer> nulletFactory = GenericUnions.nulletFactory();
-        Union1.Factory<Integer> singletFactory = GenericUnions.singletFactory();
-        Union2.Factory<Integer, Integer> doubletFactory = GenericUnions.doubletFactory();
-        Union3.Factory<Integer, Integer, Integer> tripletFactory = GenericUnions.tripletFactory();
-        Union4.Factory<Integer, Integer, Integer, Integer> quartetFactory = GenericUnions
+        Union0.Factory<Integer> nulletFactory = UnionFactories.nulletFactory();
+        Union1.Factory<Integer> singletFactory = UnionFactories.singletFactory();
+        Union2.Factory<Integer, Integer> doubletFactory = UnionFactories.doubletFactory();
+        Union3.Factory<Integer, Integer, Integer> tripletFactory = UnionFactories.tripletFactory();
+        Union4.Factory<Integer, Integer, Integer, Integer> quartetFactory = UnionFactories
                 .quartetFactory();
-        Union5.Factory<Integer, Integer, Integer, Integer, Integer> quintetFactory = GenericUnions
+        Union5.Factory<Integer, Integer, Integer, Integer, Integer> quintetFactory = UnionFactories
                 .quintetFactory();
-        Union6.Factory<Integer, Integer, Integer, Integer, Integer, Integer> sextetFactory = GenericUnions
+        Union6.Factory<Integer, Integer, Integer, Integer, Integer, Integer> sextetFactory = UnionFactories
                 .sextetFactory();
-        Union7.Factory<Integer, Integer, Integer, Integer, Integer, Integer, Integer> septetFactory = GenericUnions
+        Union7.Factory<Integer, Integer, Integer, Integer, Integer, Integer, Integer> septetFactory = UnionFactories
                 .septetFactory();
-        Union8.Factory<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer> octetFactory = GenericUnions
+        Union8.Factory<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer> octetFactory = UnionFactories
                 .octetFactory();
-        Union9.Factory<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer> nonetFactory = GenericUnions
+        Union9.Factory<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer> nonetFactory = UnionFactories
                 .nonetFactory();
         nulletFactory.first(0).continued(SUCCESS);
-        singletFactory.first(0).continued(SUCCESS, new Action0() {
+        singletFactory.first(0).continued(SUCCESS, new Action() {
             @Override
-            public void call() {
+            public void run() {
                 throw new IllegalStateException();
             }
         });
@@ -213,9 +213,9 @@ public class GenericUnionsTest {
         nonetFactory.first(0).continued(SUCCESS, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR,
                 ERROR);
         /* */
-        singletFactory.none().continued(ERROR, new Action0() {
+        singletFactory.none().continued(ERROR, new Action() {
             @Override
-            public void call() {
+            public void run() {
             }
         });
         doubletFactory.second(0).continued(ERROR, SUCCESS);

@@ -16,7 +16,7 @@
 
 package com.pacoworks.rxsealedunions.tennis;
 
-import rx.functions.Func1;
+import io.reactivex.functions.Function;
 
 public class TennisGame {
     public static Score scorePoint(Score score, Player player) {
@@ -24,45 +24,45 @@ public class TennisGame {
                 scoreDeuce(player), scoreGame(player));
     }
 
-    private static Func1<Points, Score> scorePoints(final Player player) {
-        return new Func1<Points, Score>() {
+    private static Function<Points, Score> scorePoints(final Player player) {
+        return new Function<Points, Score>() {
             @Override
-            public Score call(final Points points) {
+            public Score apply(final Points points) {
                 if (isPlayerForty(points.getKey())) {
-                    return player.getPlayer().join(new Func1<PlayerOne, Score>() {
+                    return player.getPlayer().join(new Function<PlayerOne, Score>() {
                         @Override
-                        public Score call(PlayerOne one) {
+                        public Score apply(PlayerOne one) {
                             return Score.game(Game.one());
                         }
-                    }, new Func1<PlayerTwo, Score>() {
+                    }, new Function<PlayerTwo, Score>() {
                         @Override
-                        public Score call(PlayerTwo two) {
+                        public Score apply(PlayerTwo two) {
                             return isPlayerThirty(points.getValue()) ? Score.deuce()
                                     : scorePlayer(points.getKey(), score(points.getValue()));
                         }
                     });
                 } else if (isPlayerForty(points.getValue())) {
-                    return player.getPlayer().join(new Func1<PlayerOne, Score>() {
+                    return player.getPlayer().join(new Function<PlayerOne, Score>() {
                         @Override
-                        public Score call(PlayerOne one) {
+                        public Score apply(PlayerOne one) {
                             return isPlayerThirty(points.getKey()) ? Score.deuce()
                                     : scorePlayer(score(points.getKey()), points.getValue());
                         }
-                    }, new Func1<PlayerTwo, Score>() {
+                    }, new Function<PlayerTwo, Score>() {
                         @Override
-                        public Score call(PlayerTwo two) {
+                        public Score apply(PlayerTwo two) {
                             return Score.game(Game.two());
                         }
                     });
                 } else {
-                    return player.getPlayer().join(new Func1<PlayerOne, Score>() {
+                    return player.getPlayer().join(new Function<PlayerOne, Score>() {
                         @Override
-                        public Score call(PlayerOne one) {
+                        public Score apply(PlayerOne one) {
                             return scorePlayer(score(points.getKey()), points.getValue());
                         }
-                    }, new Func1<PlayerTwo, Score>() {
+                    }, new Function<PlayerTwo, Score>() {
                         @Override
-                        public Score call(PlayerTwo two) {
+                        public Score apply(PlayerTwo two) {
                             return scorePlayer(points.getKey(), score(points.getValue()));
                         }
                     });
@@ -76,107 +76,107 @@ public class TennisGame {
     }
 
     private static boolean isPlayerThirty(PlayerPoints playerPoints) {
-        return playerPoints.getPlayerPoints().join(new Func1<Zero, Boolean>() {
+        return playerPoints.getPlayerPoints().join(new Function<Zero, Boolean>() {
             @Override
-            public Boolean call(Zero zero) {
+            public Boolean apply(Zero zero) {
                 return false;
             }
-        }, new Func1<Fifteen, Boolean>() {
+        }, new Function<Fifteen, Boolean>() {
             @Override
-            public Boolean call(Fifteen fifteen) {
+            public Boolean apply(Fifteen fifteen) {
                 return false;
             }
-        }, new Func1<Thirty, Boolean>() {
+        }, new Function<Thirty, Boolean>() {
             @Override
-            public Boolean call(Thirty thirty) {
+            public Boolean apply(Thirty thirty) {
                 return true;
             }
-        }, new Func1<Forty, Boolean>() {
+        }, new Function<Forty, Boolean>() {
             @Override
-            public Boolean call(Forty forty) {
+            public Boolean apply(Forty forty) {
                 return false;
             }
         });
     }
 
     private static boolean isPlayerForty(PlayerPoints playerPoints) {
-        return playerPoints.getPlayerPoints().join(new Func1<Zero, Boolean>() {
+        return playerPoints.getPlayerPoints().join(new Function<Zero, Boolean>() {
             @Override
-            public Boolean call(Zero zero) {
+            public Boolean apply(Zero zero) {
                 return false;
             }
-        }, new Func1<Fifteen, Boolean>() {
+        }, new Function<Fifteen, Boolean>() {
             @Override
-            public Boolean call(Fifteen fifteen) {
+            public Boolean apply(Fifteen fifteen) {
                 return false;
             }
-        }, new Func1<Thirty, Boolean>() {
+        }, new Function<Thirty, Boolean>() {
             @Override
-            public Boolean call(Thirty thirty) {
+            public Boolean apply(Thirty thirty) {
                 return false;
             }
-        }, new Func1<Forty, Boolean>() {
+        }, new Function<Forty, Boolean>() {
             @Override
-            public Boolean call(Forty forty) {
+            public Boolean apply(Forty forty) {
                 return true;
             }
         });
     }
 
     private static PlayerPoints score(PlayerPoints playerPoints) {
-        return playerPoints.getPlayerPoints().join(new Func1<Zero, PlayerPoints>() {
+        return playerPoints.getPlayerPoints().join(new Function<Zero, PlayerPoints>() {
             @Override
-            public PlayerPoints call(Zero zero) {
+            public PlayerPoints apply(Zero zero) {
                 return PlayerPoints.fifteen();
             }
-        }, new Func1<Fifteen, PlayerPoints>() {
+        }, new Function<Fifteen, PlayerPoints>() {
             @Override
-            public PlayerPoints call(Fifteen fifteen) {
+            public PlayerPoints apply(Fifteen fifteen) {
                 return PlayerPoints.thirty();
             }
-        }, new Func1<Thirty, PlayerPoints>() {
+        }, new Function<Thirty, PlayerPoints>() {
             @Override
-            public PlayerPoints call(Thirty thirty) {
+            public PlayerPoints apply(Thirty thirty) {
                 return PlayerPoints.forty();
             }
-        }, new Func1<Forty, PlayerPoints>() {
+        }, new Function<Forty, PlayerPoints>() {
             @Override
-            public PlayerPoints call(Forty forty) {
+            public PlayerPoints apply(Forty forty) {
                 throw new IllegalStateException();
             }
         });
     }
 
-    private static Func1<Advantage, Score> scoreAdvantage(final Player player) {
-        return new Func1<Advantage, Score>() {
+    private static Function<Advantage, Score> scoreAdvantage(final Player player) {
+        return new Function<Advantage, Score>() {
             @Override
-            public Score call(Advantage advantage) {
-                return advantage.getPlayer().join(new Func1<PlayerOne, Score>() {
+            public Score apply(Advantage advantage) {
+                return advantage.getPlayer().join(new Function<PlayerOne, Score>() {
                     @Override
-                    public Score call(PlayerOne playerOne) {
-                        return player.getPlayer().join(new Func1<PlayerOne, Score>() {
+                    public Score apply(PlayerOne playerOne) {
+                        return player.getPlayer().join(new Function<PlayerOne, Score>() {
                             @Override
-                            public Score call(PlayerOne one) {
+                            public Score apply(PlayerOne one) {
                                 return Score.game(Game.one());
                             }
-                        }, new Func1<PlayerTwo, Score>() {
+                        }, new Function<PlayerTwo, Score>() {
                             @Override
-                            public Score call(PlayerTwo two) {
+                            public Score apply(PlayerTwo two) {
                                 return Score.deuce();
                             }
                         });
                     }
-                }, new Func1<PlayerTwo, Score>() {
+                }, new Function<PlayerTwo, Score>() {
                     @Override
-                    public Score call(PlayerTwo playerTwo) {
-                        return player.getPlayer().join(new Func1<PlayerOne, Score>() {
+                    public Score apply(PlayerTwo playerTwo) {
+                        return player.getPlayer().join(new Function<PlayerOne, Score>() {
                             @Override
-                            public Score call(PlayerOne one) {
+                            public Score apply(PlayerOne one) {
                                 return Score.deuce();
                             }
-                        }, new Func1<PlayerTwo, Score>() {
+                        }, new Function<PlayerTwo, Score>() {
                             @Override
-                            public Score call(PlayerTwo two) {
+                            public Score apply(PlayerTwo two) {
                                 return Score.game(Game.two());
                             }
                         });
@@ -186,18 +186,18 @@ public class TennisGame {
         };
     }
 
-    private static Func1<Deuce, Score> scoreDeuce(final Player player) {
-        return new Func1<Deuce, Score>() {
+    private static Function<Deuce, Score> scoreDeuce(final Player player) {
+        return new Function<Deuce, Score>() {
             @Override
-            public Score call(Deuce deuce) {
-                return player.getPlayer().join(new Func1<PlayerOne, Score>() {
+            public Score apply(Deuce deuce) {
+                return player.getPlayer().join(new Function<PlayerOne, Score>() {
                     @Override
-                    public Score call(PlayerOne first) {
+                    public Score apply(PlayerOne first) {
                         return Score.advantage(Advantage.one());
                     }
-                }, new Func1<PlayerTwo, Score>() {
+                }, new Function<PlayerTwo, Score>() {
                     @Override
-                    public Score call(PlayerTwo second) {
+                    public Score apply(PlayerTwo second) {
                         return Score.advantage(Advantage.two());
                     }
                 });
@@ -205,18 +205,18 @@ public class TennisGame {
         };
     }
 
-    private static Func1<Game, Score> scoreGame(final Player player) {
-        return new Func1<Game, Score>() {
+    private static Function<Game, Score> scoreGame(final Player player) {
+        return new Function<Game, Score>() {
             @Override
-            public Score call(Game game) {
-                return player.getPlayer().join(new Func1<PlayerOne, Score>() {
+            public Score apply(Game game) {
+                return player.getPlayer().join(new Function<PlayerOne, Score>() {
                     @Override
-                    public Score call(PlayerOne one) {
+                    public Score apply(PlayerOne one) {
                         return scorePlayer(PlayerPoints.fifteen(), PlayerPoints.zero());
                     }
-                }, new Func1<PlayerTwo, Score>() {
+                }, new Function<PlayerTwo, Score>() {
                     @Override
-                    public Score call(PlayerTwo second) {
+                    public Score apply(PlayerTwo second) {
                         return scorePlayer(PlayerPoints.zero(), PlayerPoints.fifteen());
                     }
                 });

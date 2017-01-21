@@ -1,13 +1,13 @@
 
 package com.pacoworks.rxsealedunions.tennis;
 
-import rx.functions.Func1;
-
 import com.pacoworks.rxsealedunions.Union4;
-import com.pacoworks.rxsealedunions.generic.GenericUnions;
+import com.pacoworks.rxsealedunions.generic.UnionFactories;
+
+import io.reactivex.functions.Function;
 
 public abstract class PlayerPoints {
-    private static final Union4.Factory<Zero, Fifteen, Thirty, Forty> FACTORY = GenericUnions
+    private static final Union4.Factory<Zero, Fifteen, Thirty, Forty> FACTORY = UnionFactories
             .quartetFactory();
 
     private static final Union4<Zero, Fifteen, Thirty, Forty> FORTY = FACTORY.fourth(new Forty());
@@ -49,24 +49,24 @@ public abstract class PlayerPoints {
     }
 
     public static String getString(PlayerPoints playerPoints) {
-        return playerPoints.getPlayerPoints().join(new Func1<Zero, String>() {
+        return playerPoints.getPlayerPoints().join(new Function<Zero, String>() {
             @Override
-            public String call(Zero zero) {
+            public String apply(Zero zero) {
                 return "0";
             }
-        }, new Func1<Fifteen, String>() {
+        }, new Function<Fifteen, String>() {
             @Override
-            public String call(Fifteen fifteen) {
+            public String apply(Fifteen fifteen) {
                 return "15";
             }
-        }, new Func1<Thirty, String>() {
+        }, new Function<Thirty, String>() {
             @Override
-            public String call(Thirty thirty) {
+            public String apply(Thirty thirty) {
                 return "30";
             }
-        }, new Func1<Forty, String>() {
+        }, new Function<Forty, String>() {
             @Override
-            public String call(Forty forty) {
+            public String apply(Forty forty) {
                 return "40";
             }
         });
