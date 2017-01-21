@@ -188,7 +188,7 @@ A domain class giving a more explicit naming and access to its methods and conte
 ```java
 public class Salute {
 
-    private static final Either.Factory<Dog, Neighbour> FACTORY = GenericUnions.eitherFactory();
+    private static final Union2.Factory<Dog, Neighbour> FACTORY = GenericUnions.eitherFactory();
 
     public static Salute dog(String name, int paws) {
         return new Salute(FACTORY.left(new Dog(name, paws)));
@@ -255,7 +255,7 @@ class CardPayment extends PaymentType {
     }
     
     public boolean valid() {
-        return /* some logic here */
+        return /* some logic here */;
     }
 
     public void continued(Action1<CardPayment> continuationLeft, Action1<PayPalPayment> continuationMiddle, Action1<BankTransferPayment> continuationRight) {
@@ -317,7 +317,7 @@ class BankTransferPayment extends PaymentType {
 
 PaymentType payment = getUserPayment();
 if (payment.valid()) {
-    payment.continued(paymentService::byCard(), paymentService::withPayPal(), paymentService::viaBankTransfer())
+    payment.continued(paymentService::byCard(), paymentService::withPayPal(), paymentService::viaBankTransfer());
 }
 ```
 
