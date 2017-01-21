@@ -352,7 +352,7 @@ public abstract class Player {
 
 # License
 
-Copyright (c) pakoito 2016
+Copyright (c) pakoito 2017
 
 The Apache Software License, Version 2.0
 
