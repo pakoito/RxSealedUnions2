@@ -116,9 +116,9 @@ For the library I have chosen continuations and joining as the default methods i
 ```java
 public interface Union2<Left, Right> {
 
-    void continued(Action1<First> continuationFirst, Action1<Second> continuationSecond);
+    void continued(Consumer<First> continuationFirst, Consumer<Second> continuationSecond);
 
-    <R> R join(Func1<First, R> mapFirst, Func1<Second, R> mapSecond);
+    <R> R join(Function<First, R> mapFirst, Function<Second, R> mapSecond);
 }
 ```
 
@@ -204,11 +204,11 @@ public class Salute {
         this.either = either;
     }
 
-    public void openDoor(Action1<Dog> continueDog, Action1<Neighbour> continueNeighbour) {
+    public void openDoor(Consumer<Dog> continueDog, Consumer<Neighbour> continueNeighbour) {
         return either.continued(continueDog, continueNeighbour);
     }
 
-    public String rememberSalute(Func1<Dog, String> mapDog, Func1<Neighbour, String> mapNeighbour) {
+    public String rememberSalute(Function<Dog, String> mapDog, Function<Neighbour, String> mapNeighbour) {
         return either.join(mapDog, mapNeighbour);
     }
 }
@@ -258,11 +258,11 @@ class CardPayment extends PaymentType {
         return /* some logic here */;
     }
 
-    public void continued(Action1<CardPayment> continuationLeft, Action1<PayPalPayment> continuationMiddle, Action1<BankTransferPayment> continuationRight) {
+    public void continued(Consumer<CardPayment> continuationLeft, Consumer<PayPalPayment> continuationMiddle, Consumer<BankTransferPayment> continuationRight) {
         continuationLeft.call(value);
     }
 
-    public <T> T join(Func1<CardPayment, T> mapLeft, Func1<PayPalPayment, T> mapMiddle, Func1<BankTransferPayment, T> mapRight) {
+    public <T> T join(Function<CardPayment, T> mapLeft, Function<PayPalPayment, T> mapMiddle, Function<BankTransferPayment, T> mapRight) {
         return mapLeft.call(value);
     }
 }
@@ -282,11 +282,11 @@ class PayPalPayment extends PaymentType {
         return /* some logic here */
     }
 
-    public void continued(Action1<CardPayment> continuationLeft, Action1<PayPalPayment> continuationMiddle, Action1<BankTransferPayment> continuationRight) {
+    public void continued(Consumer<CardPayment> continuationLeft, Consumer<PayPalPayment> continuationMiddle, Consumer<BankTransferPayment> continuationRight) {
         continuationMiddle.call(value);
     }
 
-    public <T> T join(Func1<CardPayment, T> mapLeft, Func1<PayPalPayment, T> mapMiddle, Func1<BankTransferPayment, T> mapRight) {
+    public <T> T join(Function<CardPayment, T> mapLeft, Function<PayPalPayment, T> mapMiddle, Function<BankTransferPayment, T> mapRight) {
         return mapMiddle.call(value);
     }
 }
@@ -304,11 +304,11 @@ class BankTransferPayment extends PaymentType {
         return /* some logic here */
     }
 
-    public void continued(Action1<CardPayment> continuationLeft, Action1<PayPalPayment> continuationMiddle, Action1<BankTransferPayment> continuationRight) {
+    public void continued(Consumer<CardPayment> continuationLeft, Consumer<PayPalPayment> continuationMiddle, Consumer<BankTransferPayment> continuationRight) {
         continuationRight.call(value);
     }
 
-    public <T> T join(Func1<CardPayment, T> mapLeft, Func1<PayPalPayment, T> mapMiddle, Func1<BankTransferPayment, T> mapRight) {
+    public <T> T join(Function<CardPayment, T> mapLeft, Function<PayPalPayment, T> mapMiddle, Function<BankTransferPayment, T> mapRight) {
         return mapRight.call(value);
     }
 }
