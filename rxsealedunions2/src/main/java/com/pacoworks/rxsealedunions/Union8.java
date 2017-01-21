@@ -16,8 +16,8 @@
 
 package com.pacoworks.rxsealedunions;
 
-import rx.functions.Action1;
-import rx.functions.Func1;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 
 /**
  * Union8 represents a union containing an element of 8 possible types
@@ -35,10 +35,10 @@ public interface Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eig
     /**
      * Executes one of the continuations depending on the element type
      */
-    void continued(Action1<First> continuationFirst, Action1<Second> continuationSecond,
-                   Action1<Third> continuationThird, Action1<Fourth> continuationFourth,
-                   Action1<Fifth> continuationFifth, Action1<Sixth> continuationSixth,
-                   Action1<Seventh> continuationSeventh, Action1<Eighth> continuationEighth);
+    void continued(Consumer<First> continuationFirst, Consumer<Second> continuationSecond,
+                   Consumer<Third> continuationThird, Consumer<Fourth> continuationFourth,
+                   Consumer<Fifth> continuationFifth, Consumer<Sixth> continuationSixth,
+                   Consumer<Seventh> continuationSeventh, Consumer<Eighth> continuationEighth);
 
     /**
      * Transforms the element in the union to a new type
@@ -46,10 +46,10 @@ public interface Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eig
      * @param <R> result type
      * @return an object of the result type
      */
-    <R> R join(Func1<First, R> mapFirst, Func1<Second, R> mapSecond,
-               Func1<Third, R> mapThird, Func1<Fourth, R> mapFourth, Func1<Fifth, R> mapFifth,
-               Func1<Sixth, R> mapSixth, Func1<Seventh, R> mapSeventh,
-               Func1<Eighth, R> mapEighth);
+    <R> R join(Function<First, R> mapFirst, Function<Second, R> mapSecond,
+               Function<Third, R> mapThird, Function<Fourth, R> mapFourth, Function<Fifth, R> mapFifth,
+               Function<Sixth, R> mapSixth, Function<Seventh, R> mapSeventh,
+               Function<Eighth, R> mapEighth);
 
     /**
      * Creator class for Union8

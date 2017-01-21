@@ -16,19 +16,22 @@
 
 package com.pacoworks.rxsealedunions;
 
-import rx.functions.Action1;
-import rx.functions.Func1;
+import java.util.concurrent.Callable;
+
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 
 /**
- * Union0 represents a union containing an element of 1 possible type
+ * Union1 represents a union containing an element of 1 possible type, or none at all
  * 
  * @param <First> The type represented by this union
  */
-public interface Union0<First> {
+public interface Union1<First> {
     /**
      * Executes one of the continuations depending on the element type
      */
-    void continued(Action1<First> continuationFirst);
+    void continued(Consumer<First> continuationFirst, Action continuationNone);
 
     /**
      * Transforms the element in the union to a new type
@@ -36,18 +39,25 @@ public interface Union0<First> {
      * @param <R> result type
      * @return an object of the result type
      */
-    <R> R join(Func1<First, R> mapFirst);
+    <R> R join(Function<First, R> mapFirst, Callable<R> mapNone);
 
     /**
-     * Creator class for Union0
+     * Creator class for Union1
      */
     interface Factory<First> {
         /**
-         * Creates a Union0 wrapping a value
+         * Creates a Union1 wrapping a value
          * 
          * @param single the value
-         * @return a Union0 object wrapping the value
+         * @return a Union1 object wrapping the value
          */
-        Union0<First> first(First single);
+        Union1<First> first(First single);
+
+        /**
+         * Creates a Union1 wrapping no value
+         *
+         * @return a Union1 object wrapping no value
+         */
+        Union1<First> none();
     }
 }

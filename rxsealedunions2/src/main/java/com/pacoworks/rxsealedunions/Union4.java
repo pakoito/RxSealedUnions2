@@ -16,8 +16,8 @@
 
 package com.pacoworks.rxsealedunions;
 
-import rx.functions.Action1;
-import rx.functions.Func1;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 
 /**
  * Union4 represents a union containing an element of 4 possible types
@@ -31,8 +31,8 @@ public interface Union4<First, Second, Third, Fourth> {
     /**
      * Executes one of the continuations depending on the element type
      */
-    void continued(Action1<First> continuationFirst, Action1<Second> continuationSecond,
-                   Action1<Third> continuationThird, Action1<Fourth> continuationFourth);
+    void continued(Consumer<First> continuationFirst, Consumer<Second> continuationSecond,
+                   Consumer<Third> continuationThird, Consumer<Fourth> continuationFourth);
 
     /**
      * Transforms the element in the union to a new type
@@ -40,8 +40,8 @@ public interface Union4<First, Second, Third, Fourth> {
      * @param <R> result type
      * @return an object of the result type
      */
-    <R> R join(Func1<First, R> mapFirst, Func1<Second, R> mapSecond,
-               Func1<Third, R> mapThird, Func1<Fourth, R> mapFourth);
+    <R> R join(Function<First, R> mapFirst, Function<Second, R> mapSecond,
+               Function<Third, R> mapThird, Function<Fourth, R> mapFourth);
 
     /**
      * Creator class for Union4

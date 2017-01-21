@@ -16,47 +16,47 @@
 
 package com.pacoworks.rxsealedunions;
 
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 
 /**
- * Union1 represents a union containing an element of 1 possible type, or none at all
- * 
- * @param <First> The type represented by this union
+ * Union2 represents a union containing an element of 2 possible types
+ *
+ * @param <First> first possible type
+ * @param <Second> second possible type
  */
-public interface Union1<First> {
+public interface Union2<First, Second> {
     /**
      * Executes one of the continuations depending on the element type
      */
-    void continued(Action1<First> continuationFirst, Action0 continuationNone);
+    void continued(Consumer<First> continuationFirst, Consumer<Second> continuationSecond);
 
     /**
      * Transforms the element in the union to a new type
-     * 
+     *
      * @param <R> result type
      * @return an object of the result type
      */
-    <R> R join(Func1<First, R> mapFirst, Func0<R> mapNone);
+    <R> R join(Function<First, R> mapFirst, Function<Second, R> mapSecond);
 
     /**
-     * Creator class for Union1
+     * Creator class for Union2
      */
-    interface Factory<First> {
+    interface Factory<First, Second> {
         /**
-         * Creates a Union1 wrapping a value
-         * 
-         * @param single the value
-         * @return a Union1 object wrapping the value
+         * Creates a Union2 wrapping a value of the first type
+         *
+         * @param value the value
+         * @return a Union2 object wrapping the value
          */
-        Union1<First> first(First single);
+        Union2<First, Second> first(First value);
 
         /**
-         * Creates a Union1 wrapping no value
+         * Creates a Union2 wrapping a value of the second type
          *
-         * @return a Union1 object wrapping no value
+         * @param value the value
+         * @return a Union2 object wrapping the value
          */
-        Union1<First> none();
+        Union2<First, Second> second(Second value);
     }
 }

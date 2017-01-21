@@ -32,8 +32,8 @@
 
 package com.pacoworks.rxsealedunions;
 
-import rx.functions.Action1;
-import rx.functions.Func1;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 
 /**
  * Union3 represents a union containing an element of 3 possible types
@@ -46,8 +46,8 @@ public interface Union3<First, Second, Third> {
     /**
      * Executes one of the continuations depending on the element type
      */
-    void continued(Action1<First> continuationFirst, Action1<Second> continuationSecond,
-                   Action1<Third> continuationThird);
+    void continued(Consumer<First> continuationFirst, Consumer<Second> continuationSecond,
+                   Consumer<Third> continuationThird);
 
     /**
      * Transforms the element in the union to a new type
@@ -55,8 +55,8 @@ public interface Union3<First, Second, Third> {
      * @param <R> result type
      * @return an object of the result type
      */
-    <R> R join(Func1<First, R> mapFirst, Func1<Second, R> mapSecond,
-               Func1<Third, R> mapThird);
+    <R> R join(Function<First, R> mapFirst, Function<Second, R> mapSecond,
+               Function<Third, R> mapThird);
 
     /**
      * Creator class for Union3

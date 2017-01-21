@@ -16,8 +16,8 @@
 
 package com.pacoworks.rxsealedunions;
 
-import rx.functions.Action1;
-import rx.functions.Func1;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 
 /**
  * Union9 represents a union containing an element of 9 possible types
@@ -36,11 +36,11 @@ public interface Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eig
     /**
      * Executes one of the continuations depending on the element type
      */
-    void continued(Action1<First> continuationFirst, Action1<Second> continuationSecond,
-                   Action1<Third> continuationThird, Action1<Fourth> continuationFourth,
-                   Action1<Fifth> continuationFifth, Action1<Sixth> continuationSixth,
-                   Action1<Seventh> continuationSeventh, Action1<Eighth> continuationEighth,
-                   Action1<Ninth> continuationNinth);
+    void continued(Consumer<First> continuationFirst, Consumer<Second> continuationSecond,
+                   Consumer<Third> continuationThird, Consumer<Fourth> continuationFourth,
+                   Consumer<Fifth> continuationFifth, Consumer<Sixth> continuationSixth,
+                   Consumer<Seventh> continuationSeventh, Consumer<Eighth> continuationEighth,
+                   Consumer<Ninth> continuationNinth);
 
     /**
      * Transforms the element in the union to a new type
@@ -48,10 +48,10 @@ public interface Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eig
      * @param <R> result type
      * @return an object of the result type
      */
-    <R> R join(Func1<First, R> mapFirst, Func1<Second, R> mapSecond,
-               Func1<Third, R> mapThird, Func1<Fourth, R> mapFourth, Func1<Fifth, R> mapFifth,
-               Func1<Sixth, R> mapSixth, Func1<Seventh, R> mapSeventh,
-               Func1<Eighth, R> mapEighth, Func1<Ninth, R> mapNinth);
+    <R> R join(Function<First, R> mapFirst, Function<Second, R> mapSecond,
+               Function<Third, R> mapThird, Function<Fourth, R> mapFourth, Function<Fifth, R> mapFifth,
+               Function<Sixth, R> mapSixth, Function<Seventh, R> mapSeventh,
+               Function<Eighth, R> mapEighth, Function<Ninth, R> mapNinth);
 
     /**
      * Creator class for Union9
