@@ -78,10 +78,10 @@ It needs to be able to dereference the types to obtain a single, unequivocal, re
 ```java
 if (union.isOne()) {
     One element = union.getOne();
-    /* do something with one*/ 
+    /* do something with one */ 
 } else if (union.isTwo()) {
     Two element = union.getTwo();
-    /* do something with two*/ 
+    /* do something with two */ 
 } else...
 ```
 
@@ -93,10 +93,10 @@ if (union.isOne()) {
 MyElement element = createElement();
 if (element instanceof One) {
     One one = (One)element;
-    /* do something with one*/
+    /* do something with one */
 } else if (element instanceof Two) {
     Two two = (Two)element;
-    /* do something with two*/
+    /* do something with two */
 } else...
 ```
 It suffers from the same shortcomings as nested ifs: it requires programmer discipline to remember and check before casting, plus it leans to the same errors. The only change is that it now requires two operations: `instanceof` and a cast.
