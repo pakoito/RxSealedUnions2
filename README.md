@@ -188,7 +188,7 @@ A domain class giving a more explicit naming and access to its methods and conte
 ```java
 public class Salute {
 
-    private static final Union2.Factory<Dog, Neighbour> FACTORY = GenericUnions.eitherFactory();
+    private static final Union2.Factory<Dog, Neighbour> FACTORY = UnionFactories.eitherFactory();
 
     public static Salute dog(String name, int paws) {
         return new Salute(FACTORY.left(new Dog(name, paws)));
