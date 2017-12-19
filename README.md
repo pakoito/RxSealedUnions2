@@ -114,7 +114,7 @@ For the library I have chosen continuations and joining as the default methods i
 ### Final implementation of Union2
 
 ```java
-public interface Union2<Left, Right> {
+public interface Union2<First, Second> {
 
     void continued(Consumer<First> continuationFirst, Consumer<Second> continuationSecond);
 
